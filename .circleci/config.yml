@@ -9,7 +9,7 @@ jobs:
       - checkout
   deploy:
     docker:
-      - image: ubuntu:latest
+      - image: golang:latest
     working_directory: /app
     steps:
       - run:
