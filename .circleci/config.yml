@@ -1,0 +1,30 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: ubuntu:latest
+
+    working_directory: /app
+    steps:
+      - checkout
+  deploy:
+    docker:
+      - image: ubuntu:latest
+    working_directory: /app
+    steps:
+      - run:
+          name: Run if test pass and branch is Master
+          command: |
+            curl -H "Content-Type:application/json" -X POST https://registry.hub.docker.com/u/snowstormkitten/minecraftservertest/trigger/ce8d378e-9c37-42f6-ac4c-1da7e2a812f1/
+
+workflows:
+    version: 2
+    build-deploy:
+      jobs:
+        - build
+        - deploy:
+            requires:
+              - build
+            filters:
+              branches:
+                only: master

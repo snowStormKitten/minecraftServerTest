@@ -1,0 +1,9 @@
+version: '3'
+services:
+  web:
+    image: snowstormkitten/minecraftServerTest
+    ports:
+      - "25565:25565"
+    deploy:
+      mode: replicated
+      replicas: 1
